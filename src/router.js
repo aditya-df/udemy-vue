@@ -17,14 +17,15 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            redirect: '/coaches'
+            redirect: { name: 'coach' }
         },
         {
-            path: '/coaches',
+            path: '/udemy-vue/coaches',
+            name: 'coach',
             component: CoachList
         },
         {
-            path: '/coaches/:id',
+            path: '/udemy-vue/coaches/:id',
             component: CoachDetail,
             props: true,
             children: [
@@ -35,23 +36,23 @@ const router = createRouter({
             ]
         },
         {
-            path: '/register',
+            path: '/udemy-vue/register',
             component: CoachRegistration,
             meta: { requiredAuth: true, notCoach: true },
 
         },
         {
-            path: '/requests',
+            path: '/udemy-vue/requests',
             component: RequestReceived,
             meta: { requiredAuth: true }
         },
         {
-            path: '/auth',
+            path: '/udemy-vue/auth',
             component: UserAuth,
             meta: { requiredUnauth: true }
         },
         {
-            path: '/:notFound(.*)',
+            path: '/udemy-vue/:notFound(.*)',
             component: NotFound
         },
     ]
@@ -59,9 +60,9 @@ const router = createRouter({
 
 router.beforeEach((to, _, next) => {
     if (to.meta.requiredAuth && !store.getters.isAuthenticate) {
-        next('/auth')
+        next('/udemy-vue/auth')
     } else if (to.meta.requiredUnauth && store.getters.isAuthenticate) {
-        next('/coaches')
+        next('/udemy-vue/coaches')
     } else {
         next()
     }

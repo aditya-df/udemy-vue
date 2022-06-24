@@ -6,9 +6,11 @@
       </h1>
       <ul>
         <li>
-          <router-link to="/coaches">All Coaches</router-link>
-          <router-link to="/auth" v-if="!isLoggedIn">Login</router-link>
-          <router-link to="/requests" v-else>Requests</router-link>
+          <router-link :to="{ name: 'coach' }">All Coaches</router-link>
+          <router-link :to="{ name: 'auth' }" v-if="!isLoggedIn"
+            >Login</router-link
+          >
+          <router-link :to="{ name: 'request' }" v-else>Requests</router-link>
         </li>
         <li v-if="isLoggedIn">
           <base-button @click="logOut">Logout</base-button>
@@ -28,7 +30,7 @@ export default {
   methods: {
     logOut() {
       this.$store.dispatch('logOut');
-      this.$router.replace('/');
+      this.$router.replace({ name: 'coach' });
     },
   },
 };
