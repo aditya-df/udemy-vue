@@ -2,7 +2,7 @@
   <header>
     <nav>
       <h1>
-        <router-link to="/">Find a Coach</router-link>
+        <router-link :to="{ name: 'home' }">Find a Coach</router-link>
       </h1>
       <ul>
         <li>

@@ -13,19 +13,20 @@ import UserAuth from './pages/auth/UserAuth.vue'
 import store from './store/index.js'
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory('/vue/dist/'),
     routes: [
         {
+            name: 'home',
             path: '/',
             redirect: { name: 'coach' }
         },
         {
-            path: '/udemy-vue/coaches',
+            path: '/coaches',
             name: 'coach',
             component: CoachList
         },
         {
-            path: '/udemy-vue/coaches/:id',
+            path: '/coaches/:id',
             component: CoachDetail,
             props: true,
             children: [
@@ -36,23 +37,25 @@ const router = createRouter({
             ]
         },
         {
-            path: '/udemy-vue/register',
+            path: '/register',
             component: CoachRegistration,
             meta: { requiredAuth: true, notCoach: true },
 
         },
         {
-            path: '/udemy-vue/requests',
+            name: 'request',
+            path: '/requests',
             component: RequestReceived,
             meta: { requiredAuth: true }
         },
         {
-            path: '/udemy-vue/auth',
+            name: 'auth',
+            path: '/auth',
             component: UserAuth,
             meta: { requiredUnauth: true }
         },
         {
-            path: '/udemy-vue/:notFound(.*)',
+            path: '/:notFound(.*)',
             component: NotFound
         },
     ]
@@ -60,9 +63,9 @@ const router = createRouter({
 
 router.beforeEach((to, _, next) => {
     if (to.meta.requiredAuth && !store.getters.isAuthenticate) {
-        next('/udemy-vue/auth')
+        next('/auth')
     } else if (to.meta.requiredUnauth && store.getters.isAuthenticate) {
-        next('/udemy-vue/coaches')
+        next('/coaches')
     } else {
         next()
     }

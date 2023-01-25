@@ -63,7 +63,6 @@ export default {
         !this.email.includes('@') ||
         this.password.length < 6
       ) {
-        console.log(this.email, this.password);
         this.formIsValid = false;
         return;
       }
@@ -83,9 +82,7 @@ export default {
         }
         const redirectUrl = '/' + (this.$route.query.redirect || 'coaches');
         this.$router.replace(redirectUrl);
-        // console.log(redirectUrl);
       } catch (error) {
-        console.log(error.message);
         this.error =
           error.message.toLowerCase() || 'Failed to authenticate, try again';
       }

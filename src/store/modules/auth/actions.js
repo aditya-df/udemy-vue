@@ -70,8 +70,8 @@ export default {
 
         if (token && userId) {
             context.commit('setUser', {
-                token: localStorage.getItem('token'),
-                userId: localStorage.getItem('userId')
+                token: token,
+                userId: userId
             })
         }
     },

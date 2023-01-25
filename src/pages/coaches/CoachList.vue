@@ -107,9 +107,6 @@ export default {
   created() {
     this.loadCoaches();
   },
-  mounted() {
-    console.log(this.isCoach);
-  },
 };
 </script>
 
